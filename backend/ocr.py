@@ -5,6 +5,7 @@ def extract_marks(filepath):
     text = pytesseract.image_to_string(Image.open(filepath))
 
     subjects = []
+
     if "Physics" in text:
         subjects.append("Physics")
     if "Chemistry" in text:
@@ -15,8 +16,10 @@ def extract_marks(filepath):
         subjects.append("Biology")
 
     percentage = 50
-    if "60" in text:
-        percentage = 60
+    for i in range(100, 30, -1):
+        if str(i) in text:
+            percentage = i
+            break
 
     return {
         "subjects": subjects,
